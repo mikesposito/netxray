@@ -3,6 +3,8 @@ name = "netxray"
 version = "0.1.0"
 edition = "2021"
 description = "Transparent TCP proxy + TUI network logger for macOS (pf-based)"
+license = "MIT"
+repository = "https://github.com/mikesposito/netxray"
 
 [dependencies]
 libc = "0.2"
