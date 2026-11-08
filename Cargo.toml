@@ -1,0 +1,13 @@
+[package]
+name = "interceptor"
+version = "0.1.0"
+edition = "2021"
+description = "Transparent TCP proxy + TUI network logger for macOS (pf-based)"
+
+[dependencies]
+libc = "0.2"
+ratatui = "0.29"
+
+[profile.release]
+lto = true
+strip = true
