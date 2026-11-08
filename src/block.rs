@@ -161,7 +161,7 @@ mod tests {
 
   #[test]
   fn blocklist_file_roundtrip() {
-    let path = std::env::temp_dir().join(format!("interceptor-bl-test-{}", std::process::id()));
+    let path = std::env::temp_dir().join(format!("netxray-bl-test-{}", std::process::id()));
     let _ = fs::remove_file(&path);
     fs::write(&path, "# comment\n*.example.com\n").unwrap();
 

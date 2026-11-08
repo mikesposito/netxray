@@ -1,4 +1,4 @@
-# interceptor
+# netxray
 
 A single-binary transparent network monitor and blocker for macOS.
 
@@ -10,7 +10,7 @@ counts. Hostnames can be blocked with glob patterns.
 
 ```
 cargo build --release
-sudo ./target/release/interceptor [blocklist-path]   # default blocklist: ./blocklist.txt
+sudo ./target/release/netxray [blocklist-path]   # default blocklist: ./blocklist.txt
 ```
 
 ## TUI keys
@@ -51,7 +51,7 @@ destination (matching happens on the ClientHello / request headers).
 ## How it works
 
 ```
-app ──TCP──▶ pf route-to lo0 ──rdr──▶ 127.0.0.1:9191 (interceptor)
+app ──TCP──▶ pf route-to lo0 ──rdr──▶ 127.0.0.1:9191 (netxray)
                                             │ DIOCNATLOOK ioctl → original destination
                                             │ sniff ClientHello/HTTP headers
                                             │ blocklist? ── yes → RST close

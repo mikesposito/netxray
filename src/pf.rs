@@ -66,11 +66,11 @@ fn pfctl(args: &[&str], stdin: Option<&str>) -> io::Result<String> {
 /// pass/block (filtering) rules are appended at the end.
 fn rules(orig: &str, listen_port: u16) -> String {
   let rdr = format!(
-        "# interceptor: redirect all outbound non-loopback TCP to the proxy\n\
+        "# netxray: redirect all outbound non-loopback TCP to the proxy\n\
          rdr pass on lo0 inet proto tcp from ! 127.0.0.0/8 to ! 127.0.0.0/8 -> 127.0.0.1 port {listen_port}"
     );
   let filters = "\n\
-        # --- interceptor filters ---\n\
+        # --- netxray filters ---\n\
         # the proxy's own relays bind 20000:20999 and bypass the redirect (breaks the loop)\n\
         pass out quick inet proto tcp from any port 20000:20999 to any\n\
         pass out quick route-to lo0 inet proto tcp from ! 127.0.0.0/8 to ! 127.0.0.0/8\n\
@@ -105,7 +105,7 @@ impl Pf {
   pub fn setup(listen_port: u16) -> io::Result<Pf> {
     if unsafe { libc::geteuid() } != 0 {
       return Err(io::Error::other(
-        "must run as root: try `sudo ./interceptor`",
+        "must run as root: try `sudo ./netxray`",
       ));
     }
     let orig = fs::read_to_string("/etc/pf.conf")

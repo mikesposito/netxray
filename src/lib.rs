@@ -1,4 +1,4 @@
-//! interceptor — a transparent TCP proxy + TUI network logger for macOS.
+//! netxray — a transparent TCP proxy + TUI network logger for macOS.
 //!
 //! Intercepts every program's outbound TCP connections via pf, relays them
 //! unchanged, shows a live log (process, hostname, bytes) and can block
@@ -23,7 +23,7 @@ use proxy::LISTEN_PORT;
 /// Boot the proxy and run the TUI until the user quits. Returns the exit code.
 pub fn run(blocklist_path: String) -> i32 {
   if unsafe { libc::geteuid() } != 0 {
-    eprintln!("interceptor must run as root to manage pf — try: sudo ./interceptor");
+    eprintln!("netxray must run as root to manage pf — try: sudo ./netxray");
     return 1;
   }
 
